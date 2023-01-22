@@ -7,17 +7,14 @@ import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 
 import * as config from "../config/config.json";
 
-class Mod implements IPostAkiLoadMod, IPostDBLoadMod 
-{
+class Mod implements IPostAkiLoadMod, IPostDBLoadMod {
     container: DependencyContainer;
 
-    public postAkiLoad(container: DependencyContainer): void 
-    {
+    public postAkiLoad(container: DependencyContainer): void {
         this.container = container;
     }
 
-    public postDBLoad(container: DependencyContainer): void 
-    {
+    public postDBLoad(container: DependencyContainer): void {
         const jsonUtil = container.resolve<JsonUtil>("JsonUtil");
         const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
         const tables = databaseServer.getTables();
@@ -44,8 +41,7 @@ class Mod implements IPostAkiLoadMod, IPostDBLoadMod
         tables.templates.clientItems[itemId] = item;
 
         // Add locales
-        for (const locale of locales) 
-        {
+        for (const locale of locales) {
             locale[`${itemId} Name`] = itemName;
             locale[`${itemId} ShortName`] = itemShortName;
             locale[`${itemId} Description`] = itemDescription;
@@ -59,7 +55,7 @@ class Mod implements IPostAkiLoadMod, IPostDBLoadMod
             }
         );
 
-        
+
         tables.templates.items["55d7217a4bdc2d86028b456d"]._props.Slots[14]._props.filters[0].Filter.push(itemId); //Make it an armband too
 
         const trader = tables.traders["5ac3b934156ae10c4430e83c"]; //Add to Ragman's inventory
@@ -70,10 +66,10 @@ class Mod implements IPostAkiLoadMod, IPostDBLoadMod
             "parentId": "hideout",
             "slotId": "hideout",
             "upd":
-      {
-          "UnlimitedCount": true,
-          "StackObjectsCount": 999999
-      }
+            {
+                "UnlimitedCount": true,
+                "StackObjectsCount": 999999
+            }
         });
         trader.assort.barter_scheme[itemId] = [
             [
@@ -88,8 +84,7 @@ class Mod implements IPostAkiLoadMod, IPostDBLoadMod
         this.allowIntoSecureContainers(itemId, tables.templates.items);
     }
 
-    allowIntoSecureContainers(itemId, items): void 
-    {
+    allowIntoSecureContainers(itemId, items): void {
         const secureContainers = {
             "kappa": "5c093ca986f7740a1867ab12",
             "gamma": "5857a8bc2459772bad15db29",
@@ -100,8 +95,7 @@ class Mod implements IPostAkiLoadMod, IPostDBLoadMod
         };
 
 
-        for (const secureCase in secureContainers) 
-        {
+        for (const secureCase in secureContainers) {
             items[secureContainers[secureCase]]
                 ._props
                 .Grids[0]
@@ -112,20 +106,17 @@ class Mod implements IPostAkiLoadMod, IPostDBLoadMod
         }
     }
 
-    createGrid(container, itemId, columns) 
-    {
+    createGrid(container, itemId, columns) {
         const grids = [];
-      
-        for (const [key, val] of Object.entries(columns)) 
-        {
+
+        for (const [key, val] of Object.entries(columns)) {
             grids.push(this.generateColumn(container, itemId, `column_${key}`, val.cellH, val.cellV));
         }
 
         return grids;
     }
 
-    generateColumn(container: DependencyContainer, itemId, name, cellH, cellV) 
-    {
+    generateColumn(container: DependencyContainer, itemId, name, cellH, cellV) {
         const hashUtil = container.resolve<HashUtil>("HashUtil");
         const BULLET = "5485a8684bdc2da71d8b4567";
         const AMMO_BOX = "543be5cb4bdc2deb348b4568";
