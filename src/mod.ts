@@ -55,7 +55,6 @@ class Mod implements IPostAkiLoadMod, IPostDBLoadMod {
             }
         );
 
-
         tables.templates.items["55d7217a4bdc2d86028b456d"]._props.Slots[14]._props.filters[0].Filter.push(itemId); //Make it an armband too
 
         const trader = tables.traders["5ac3b934156ae10c4430e83c"]; //Add to Ragman's inventory
