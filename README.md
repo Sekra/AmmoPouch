@@ -1,11 +1,7 @@
 # Jiblet-LeKaiju-Orbitas-AmmoPouch
 
-I wanted the old ammopouch mod to work (credit to LeKaiju and Orbitas for that):
-https://hub.sp-tarkov.com/files/file/320-le-kaiju-orbitas-ammopouch/
-
-So I put it into a blender with Revingly's Medical SICC case:
-https://hub.sp-tarkov.com/files/file/270-medical-sicc-case-micc/
-
+I wanted the [old ammopouch mod](https://hub.sp-tarkov.com/files/file/320-le-kaiju-orbitas-ammopouch/) to work (credit to LeKaiju and Orbitas for that):
+So I put it into a blender with [Revingly's Medical SICC](https://hub.sp-tarkov.com/files/file/270-medical-sicc-case-micc/).
 And pulsed for 30 seconds.
 
 The resulting Ammo Pouch is available from Ragman for 50,000 rubles.
