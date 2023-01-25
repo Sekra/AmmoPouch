@@ -4,17 +4,29 @@ import { IPostDBLoadMod } from "@spt-aki/models/external/IPostDBLoadMod";
 import { HashUtil } from "@spt-aki/utils/HashUtil";
 import { JsonUtil } from "@spt-aki/utils/JsonUtil";
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
+import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 
 import * as config from "../config/config.json";
+const logging = config.Logging;
 
 class Mod implements IPostAkiLoadMod, IPostDBLoadMod {
+    logger: ILogger
+    modName: string
+    modVersion: string
     container: DependencyContainer;
+
+    constructor() {
+        this.modName = "Jiblet's Ammo Pouch"; // Set name and version of the mod so we can log it to console later
+        this.modVersion = "1.0.1";
+    }
 
     public postAkiLoad(container: DependencyContainer): void {
         this.container = container;
     }
 
     public postDBLoad(container: DependencyContainer): void {
+        this.logger = container.resolve<ILogger>("WinstonLogger");
+        this.logger.log(`[${this.modName} : ${this.modVersion}] : Mod loading`, "green");
         const jsonUtil = container.resolve<JsonUtil>("JsonUtil");
         const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
         const tables = databaseServer.getTables();
@@ -29,14 +41,20 @@ class Mod implements IPostAkiLoadMod, IPostDBLoadMod {
             itemPrefabPath = "AmmoPouch/item_food_mayo.bundle",
             itemName = "Ammo Pouch",
             itemShortName = "AmmoPouch",
-            itemDescription = "A pouch, for ammunition",
+            itemDescription = "A pouch for ammunition",
             itemTraderPrice = config.price;
 
         const item = jsonUtil.clone(tables.templates.items[SMALL_SICC_ID]);
 
         item._id = itemId;
         item._props.Prefab.path = itemPrefabPath;
-        item._props.Grids = this.createGrid(container, itemId, config.columns)
+
+        //Dooo Eeeet
+        item._props.Grids = this.createGrid(container, itemId, config.InternalSize);
+        //Set external size of the container:
+        item._props.Width = config.ExternalSize.cellH;
+        item._props.Height = config.ExternalSize.cellV;
+
         tables.templates.items[itemId] = item;
         tables.templates.clientItems[itemId] = item;
 
@@ -55,7 +73,10 @@ class Mod implements IPostAkiLoadMod, IPostDBLoadMod {
             }
         );
 
-        tables.templates.items["55d7217a4bdc2d86028b456d"]._props.Slots[14]._props.filters[0].Filter.push(itemId); //Make it an armband too
+        //Check config and make it an armband too - note this causes clipping issues as its a real object attached to the arm.
+        if (config.AllowInArmband) {
+            tables.templates.items["55d7217a4bdc2d86028b456d"]._props.Slots[14]._props.filters[0].Filter.push(itemId);
+        }
 
         const trader = tables.traders["5ac3b934156ae10c4430e83c"]; //Add to Ragman's inventory
 

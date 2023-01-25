@@ -1,10 +1,10 @@
 {
   "name": "AmmoPouch",
-  "version": "2.0.0",
+  "version": "1.0.1",
   "author": "Jiblet, LeKaiju, Orbitas",
   "license": "NCSA Open Source",
   "main": "src/mod.js",
-  "akiVersion": "3.4.1",
+  "akiVersion": "3.4.x",
   "isBundleMod": true,
   "scripts": {
     "setup": "npm i",
