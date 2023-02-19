@@ -56,8 +56,7 @@ class Mod implements IPostAkiLoadMod, IPostDBLoadMod {
         item._props.Height = config.ExternalSize.cellV;
 
         tables.templates.items[itemId] = item;
-        tables.templates.clientItems[itemId] = item;
-
+        
         // Add locales
         for (const locale of locales) {
             locale[`${itemId} Name`] = itemName;
