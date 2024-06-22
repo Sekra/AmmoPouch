@@ -38,7 +38,7 @@ class Mod implements IPostAkiLoadMod, IPostDBLoadMod {
         const itemId = "Ammo_Pouch",
             itemCategory = "5795f317245977243854e041",
             itemFleaPrice = config.price,
-            itemPrefabPath = "AmmoPouch/patron_6mm_airsoft.bundle",
+            itemPrefabPath = "AmmoPouch/item_food_mayo.bundle",
             itemName = "Ammo Pouch",
             itemShortName = "AmmoPouch",
             itemDescription = "A pouch for ammunition",

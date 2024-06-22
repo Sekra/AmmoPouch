@@ -1,13 +1,13 @@
 {
-    "price": 50000,
-    "AllowInArmband": true,
-    "trader_loyalty_level": 1,
+    "price": 350000,
+    "AllowInArmband": false,
+    "trader_loyalty_level": 2,
     "ExternalSize": {
         "cellH": 1,
-        "cellV": 2
+        "cellV": 1
     },
     "InternalSize": [{
         "cellH": 2,
-        "cellV": 3
+        "cellV": 2
     }]
 }
