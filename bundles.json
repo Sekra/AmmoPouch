@@ -1,7 +1,7 @@
 {
     "manifest": [
         {
-            "key": "AmmoPouch/patron_6mm_airsoft.bundle",
+            "key": "AmmoPouch/item_food_mayo.bundle",
             "dependencyKeys": [
                 "assets/commonassets/physics/physicsmaterials.bundle",
                 "cubemaps",
